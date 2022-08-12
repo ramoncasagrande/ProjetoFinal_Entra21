@@ -4,56 +4,50 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 
 /**
- * Classe Modelo de Usuários
+ * Classe Modelo de Cursos
  * Criada em 11/08/2022
  * 
- * @author: Ramon Casagrande
+ * @author Ramon Casagrande
  */
 
 @Entity
-public class Users {
+public class Course {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
     @NotBlank
-    private String name;
+    private String title;
 
-    @Email
-    @NotBlank
-    private String email;
+    private String description;
 
-    private String password;
-   
-    private String role;
+    private String linkVideo;
 
     /**
-     * Contrutor padrão
+     * Construtor padrão 
      */
     @Deprecated
-    public Users(){
+    public Course(){
     }
 
     /**
      * Contrutor com argumentos
      * Criado em 11/08/2022
+     * 
      * @author Ramon Casagrande
      * 
-     * @param name
-     * @param email
-     * @param password
-     * @param role
+     * @param title
+     * @param description
+     * @param linkVideo
      */
-    public Users(@NotBlank String name, @Email @NotBlank String email, String password, String role) {
-        this.name = name;
-        this.email = email;
-        this.password = password;
-        this.role = role;
+    public Course(@NotBlank String title, String description, String linkVideo) {
+        this.title = title;
+        this.description = description;
+        this.linkVideo = linkVideo;
     }
 
     public Long getId() {
@@ -64,36 +58,28 @@ public class Users {
         this.id = id;
     }
 
-    public String getName() {
-        return name;
+    public String getTitle() {
+        return title;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setTitle(String title) {
+        this.title = title;
     }
 
-    public String getEmail() {
-        return email;
+    public String getDescription() {
+        return description;
     }
 
-    public void setEmail(String email) {
-        this.email = email;
+    public void setDescription(String description) {
+        this.description = description;
     }
 
-    public String getPassword() {
-        return password;
+    public String getLinkVideo() {
+        return linkVideo;
     }
 
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
-    public String getRole() {
-        return role;
-    }
-
-    public void setRole(String role) {
-        this.role = role;
+    public void setLinkVideo(String linkVideo) {
+        this.linkVideo = linkVideo;
     }
 
     @Override
@@ -112,12 +98,12 @@ public class Users {
             return false;
         if (getClass() != obj.getClass())
             return false;
-        Users other = (Users) obj;
+        Course other = (Course) obj;
         if (id == null) {
             if (other.id != null)
                 return false;
         } else if (!id.equals(other.id))
             return false;
         return true;
-    }    
+    }
 }
