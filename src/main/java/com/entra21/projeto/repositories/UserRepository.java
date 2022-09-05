@@ -1,4 +1,4 @@
-package com.entra21.projeto.model.repositories;
+package com.entra21.projeto.repositories;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
