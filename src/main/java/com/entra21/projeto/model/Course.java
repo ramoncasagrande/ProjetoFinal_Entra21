@@ -1,5 +1,6 @@
 package com.entra21.projeto.model;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -9,6 +10,7 @@ import javax.validation.constraints.NotBlank;
 /**
  * Classe Modelo de Cursos
  * Criada em 11/08/2022
+ * Atualizada em 05/09/2022
  * 
  * @author Ramon Casagrande
  */
@@ -21,10 +23,13 @@ public class Course {
     private Long id;
 
     @NotBlank
+    @Column(length = 100, nullable = false)
     private String title;
 
+    @Column(nullable = false)
     private String description;
 
+    @Column(nullable = false)
     private String linkVideo;
 
     /**
