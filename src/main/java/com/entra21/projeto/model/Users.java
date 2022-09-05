@@ -1,5 +1,6 @@
 package com.entra21.projeto.model;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -10,6 +11,7 @@ import javax.validation.constraints.NotBlank;
 /**
  * Classe Modelo de Usuários
  * Criada em 11/08/2022
+ * Atualizada em 05/09/2022
  * 
  * @author: Ramon Casagrande
  */
@@ -22,14 +24,18 @@ public class Users {
     private Long id;
 
     @NotBlank
+    @Column(length = 200, nullable = false)
     private String name;
 
     @Email
     @NotBlank
+    @Column(length = 100, nullable = false)
     private String email;
 
+    @Column(length = 20, nullable = false)
     private String password;
    
+    @Column(length = 10, nullable = false)
     private String role;
 
     /**
