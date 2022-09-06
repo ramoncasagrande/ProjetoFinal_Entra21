@@ -41,7 +41,6 @@ public class Users {
     /**
      * Contrutor padrão
      */
-    @Deprecated
     public Users(){
     }
 
