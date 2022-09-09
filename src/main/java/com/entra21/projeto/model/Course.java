@@ -35,7 +35,6 @@ public class Course {
     /**
      * Construtor padrão 
      */
-    @Deprecated
     public Course(){
     }
 
