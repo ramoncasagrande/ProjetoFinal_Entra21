@@ -5,17 +5,19 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Table;
 import javax.validation.constraints.NotBlank;
 
 /**
  * Classe Modelo de Cursos
  * Criada em 11/08/2022
- * Atualizada em 05/09/2022
+ * Atualizada em 15/10/2022
  * 
  * @author Ramon Casagrande
  */
 
 @Entity
+@Table(name="course")
 public class Course {
 
     @Id
@@ -30,11 +32,12 @@ public class Course {
     private String description;
 
     @Column(nullable = false)
-    private String linkVideo;
+    private String link_video;
 
     /**
      * Construtor padrão 
      */
+    @Deprecated
     public Course(){
     }
 
@@ -51,7 +54,7 @@ public class Course {
     public Course(@NotBlank String title, String description, String linkVideo) {
         this.title = title;
         this.description = description;
-        this.linkVideo = linkVideo;
+        this.link_video = linkVideo;
     }
 
     public Long getId() {
@@ -79,11 +82,11 @@ public class Course {
     }
 
     public String getLinkVideo() {
-        return linkVideo;
+        return link_video;
     }
 
     public void setLinkVideo(String linkVideo) {
-        this.linkVideo = linkVideo;
+        this.link_video = linkVideo;
     }
 
     @Override
