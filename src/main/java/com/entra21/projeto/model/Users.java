@@ -5,18 +5,20 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Table;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 
 /**
  * Classe Modelo de Usuários
  * Criada em 11/08/2022
- * Atualizada em 05/09/2022
+ * Atualizada em 15/10/2022
  * 
  * @author: Ramon Casagrande
  */
 
 @Entity
+@Table(name="users")
 public class Users {
 
     @Id
