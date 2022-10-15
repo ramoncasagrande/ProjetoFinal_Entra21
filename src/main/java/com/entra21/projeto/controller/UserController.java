@@ -5,8 +5,11 @@ import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -19,6 +22,7 @@ import com.entra21.projeto.repositories.UserRepository;
  * 
  * @author Ramon Casagrande
  */
+@CrossOrigin(origins = "http://localhost:4200")
 @RestController
 @RequestMapping("/api/users")
 public class UserController {
@@ -32,9 +36,29 @@ public class UserController {
      * 
      * @author Ramon Casagrande
      */
+
     @GetMapping
     public List<Users> list() {
         return userRepository.findAll();
+    }
+
+    /**
+     * Método para criar novo usuário
+     * Criada em 15/10/2022
+     * 
+     * @author Ramon Casagrande
+     */
+
+    @PostMapping
+    public Boolean add(@RequestBody Users usuario){
+        Users novoUsuario = new Users();
+        novoUsuario.setName(usuario.getName());
+        novoUsuario.setEmail(usuario.getEmail());
+        novoUsuario.setPassword(usuario.getPassword());
+        novoUsuario.setRole("ALUNO");
+        userRepository.save(novoUsuario);
+
+        return true;
     }
 
     /**
@@ -43,6 +67,7 @@ public class UserController {
      * 
      * @author Ramon Casagrande
      */
+
     @GetMapping("/{email}")
     public ResponseEntity<Optional<Users>> setUser(@PathVariable String email) {
         Optional<Users> user = userRepository.findByEmail(email);
@@ -55,10 +80,10 @@ public class UserController {
      * 
      * @author Ramon Casagrande
      */
+
     @GetMapping("/id/{id}")
     public ResponseEntity<Optional<Users>> setUserId(@PathVariable Long id) {
         Optional<Users> user = userRepository.findById(id);
         return ResponseEntity.ok(user);
     }
-
 }
