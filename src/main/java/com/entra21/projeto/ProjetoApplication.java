@@ -17,6 +17,8 @@ public class ProjetoApplication {
 		SpringApplication.run(ProjetoApplication.class, args);
 	}
 
+	//Remover comantário para adicionar dados iniciais
+/*
 	@Bean
 	CommandLineRunner initDataBase(UserRepository userRepository){
 		return args -> {
@@ -77,6 +79,6 @@ public class ProjetoApplication {
 			courseRepository.save(course2);
 
 		};
-	}
+	}*/
 
 }
