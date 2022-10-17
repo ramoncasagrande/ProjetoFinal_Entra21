@@ -1,5 +1,7 @@
 package com.entra21.projeto.controller;
 
+import java.io.UnsupportedEncodingException;
+import java.security.NoSuchAlgorithmException;
 import java.util.List;
 import java.util.Optional;
 
@@ -13,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.entra21.projeto.model.AuthModel;
 import com.entra21.projeto.model.Users;
 import com.entra21.projeto.repositories.UserRepository;
 
@@ -86,4 +89,21 @@ public class UserController {
         Optional<Users> user = userRepository.findById(id);
         return ResponseEntity.ok(user);
     }
+
+    /**
+     * Método para Autenticação
+     * Criada em 17/10/2022
+     * 
+     * @author Ramon Casagrande
+     */
+
+     @PostMapping("/auth")
+     public Boolean doAuth(@RequestBody AuthModel auth) 
+     throws NoSuchAlgorithmException, UnsupportedEncodingException
+     {
+        Users user = userRepository.findByEmailAndPassword(auth.getEmail(), auth.getPassword());
+        return user == null ? false : true;
+     }
+
+
 }

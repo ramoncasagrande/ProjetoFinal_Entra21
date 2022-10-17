@@ -20,6 +20,13 @@ public interface UserRepository extends JpaRepository<Users, Long> {
 
     Optional<Users> findByEmail(String email);
 
+    /**
+    * Método de busca por email e senha
+    * Criado em 17/10/2022
+    * 
+    * @author Ramon Casagrande
+    */
+
     public Users findByEmailAndPassword(String email, String password);
 
     
