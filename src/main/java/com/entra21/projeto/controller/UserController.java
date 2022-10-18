@@ -1,6 +1,7 @@
 package com.entra21.projeto.controller;
 
 import java.io.UnsupportedEncodingException;
+import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.List;
 import java.util.Optional;
@@ -53,11 +54,13 @@ public class UserController {
      */
 
     @PostMapping
-    public Boolean add(@RequestBody Users usuario){
+    public Boolean add(@RequestBody Users usuario)
+    throws NoSuchAlgorithmException, UnsupportedEncodingException
+        {
         Users novoUsuario = new Users();
         novoUsuario.setName(usuario.getName());
         novoUsuario.setEmail(usuario.getEmail());
-        novoUsuario.setPassword(usuario.getPassword());
+        novoUsuario.setPassword(encryptPassword(usuario.getPassword()));
         novoUsuario.setRole("ALUNO");
         userRepository.save(novoUsuario);
 
@@ -97,13 +100,27 @@ public class UserController {
      * @author Ramon Casagrande
      */
 
-     @PostMapping("/auth")
-     public Boolean doAuth(@RequestBody AuthModel auth) 
-     throws NoSuchAlgorithmException, UnsupportedEncodingException
-     {
-        Users user = userRepository.findByEmailAndPassword(auth.getEmail(), auth.getPassword());
-        return user == null ? false : true;
-     }
+    @PostMapping("/auth")
+    public Boolean doAuth(@RequestBody AuthModel auth) 
+    throws NoSuchAlgorithmException, UnsupportedEncodingException
+    {
+       Users user = userRepository.findByEmailAndPassword(auth.getEmail(), this.encryptPassword(auth.getPassword()));
+       return user == null ? false : true;
+    }
+
+    private String encryptPassword(String password)
+    throws NoSuchAlgorithmException, UnsupportedEncodingException
+    {
+        MessageDigest algorithm = MessageDigest.getInstance("SHA-256");
+        byte messageDigest [] = algorithm.digest(password.getBytes("UTF-8"));
+
+        StringBuilder hexString = new StringBuilder();
+        for (byte b : messageDigest){
+            hexString.append(String.format("%02X", 0xFF & b));
+        }
+        String encryptedPassword = hexString.toString().toLowerCase();
+        return encryptedPassword;
+    }
 
 
 }
