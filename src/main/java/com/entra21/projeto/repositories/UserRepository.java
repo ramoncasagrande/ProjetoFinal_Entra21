@@ -18,7 +18,9 @@ import com.entra21.projeto.model.Users;
 @Repository
 public interface UserRepository extends JpaRepository<Users, Long> {
 
-    Optional<Users> findByEmail(String email);
+    //Optional<Users> findByEmail(String email);
+
+    public Users  findByEmail(String email);
 
     /**
     * Método de busca por email e senha
