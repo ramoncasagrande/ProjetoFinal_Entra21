@@ -49,6 +49,7 @@ public class UserController {
     /**
      * Método para criar novo usuário
      * Criada em 15/10/2022
+     * Atualizado em 17/10/2022
      * 
      * @author Ramon Casagrande
      */
@@ -72,6 +73,13 @@ public class UserController {
 
         
     }
+
+    /**
+     * Método para verificar email existente
+     * Criada em 17/10/2022
+     * 
+     * @author Ramon Casagrande
+     */
 
     public Boolean CheckIfExist(String email){
         Users user = userRepository.findByEmail(email);
