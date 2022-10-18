@@ -57,14 +57,26 @@ public class UserController {
     public Boolean add(@RequestBody Users usuario)
     throws NoSuchAlgorithmException, UnsupportedEncodingException
         {
-        Users novoUsuario = new Users();
-        novoUsuario.setName(usuario.getName());
-        novoUsuario.setEmail(usuario.getEmail());
-        novoUsuario.setPassword(encryptPassword(usuario.getPassword()));
-        novoUsuario.setRole("ALUNO");
-        userRepository.save(novoUsuario);
+        if (CheckIfExist(usuario.getEmail())){
+        
+            Users novoUsuario = new Users();
+            novoUsuario.setName(usuario.getName());
+            novoUsuario.setEmail(usuario.getEmail());
+            novoUsuario.setPassword(encryptPassword(usuario.getPassword()));
+            novoUsuario.setRole("ALUNO");
+            userRepository.save(novoUsuario);
+            return true;
+        }else{
+            return false;
+        }
 
-        return true;
+        
+    }
+
+    public Boolean CheckIfExist(String email){
+        Users user = userRepository.findByEmail(email);
+        return user == null ? true : false;
+
     }
 
     /**
@@ -74,11 +86,11 @@ public class UserController {
      * @author Ramon Casagrande
      */
 
-    @GetMapping("/{email}")
+    /*@GetMapping("/{email}")
     public ResponseEntity<Optional<Users>> setUser(@PathVariable String email) {
         Optional<Users> user = userRepository.findByEmail(email);
         return ResponseEntity.ok(user);
-    }
+    }*/
 
     /**
      * Método para buscar usuários pelo ID
